@@ -1,13 +1,13 @@
 # TFCAIDM
 
 <div align="center">
-    <img src="https://github.com/Brandhsu/tfcaidm-pkg/blob/main/docs/images/tensor.png" height="240" width="284" alt="TFCAIDM Tensor">
+    <img src="https://raw.githubusercontent.com/Brandhsu/tfcaidm/master/docs/images/tensor.png" height="240" width="284" alt="TFCAIDM Tensor">
     <h4>TensorFlow CAIDM</h4>
     Deep learning pipeline for medical imaging
     <br><br>
     <img src="https://badgen.net/pypi/v/tfcaidm">
     <img src="https://badgen.net/pypi/python/tfcaidm">
-    <img src="https://badgen.net/github/license/Brandhsu/tfcaidm">
+    <img src="https://badgen.net/github/license/brandhsu/tfcaidm">
     <img src="https://badgen.net/badge/code%20style/black?color=black">
 </div>
 
@@ -15,7 +15,7 @@
 
 ## Introduction
 
-<strong>TFCAIDM</strong> is a unified framework for building and training medical imaging deep learning models built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments. User's can train or extend pre-existing models that have been implemented in `MODEL_ZOO.md` or define their own.
+<strong>[TFCAIDM](https://pypi.org/project/tfcaidm/)</strong> is a unified framework for building and training medical imaging deep learning models built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments. User's can train or extend pre-existing models that have been implemented in `MODEL_ZOO.md` or define their own.
 
 <details>
 
