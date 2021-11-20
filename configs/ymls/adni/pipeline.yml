@@ -1,0 +1,64 @@
+---
+env:
+  path:
+    root: "exp"
+    name: "adni"
+    client: "/home/brandon/tfcaidm-pkg/configs/ymls/adni/client.yml"
+  lib:
+    # pytorch: ["pytorch", "1.9.0"]
+model:
+  model: ["ae", "unet", "unet++", "unet3+"]
+  conv_type: ["conv"]
+  pool_type: ["conv"]
+  eblock:
+    [
+      "conv",
+      "aspp",
+      "cbam",
+      "csp",
+      "dense",
+      "eca",
+      "inception",
+      "psp",
+      "se",
+      "u2net",
+    ]
+  elayer: [1]
+  dblock: ["conv", "attention", "convgru"]
+  depth: [6] #[3, 4, 5]
+  width: [4]
+  width_scaling: [2]
+  kernel_size: [[3, 3, 3]]
+  strides: [[2, 2, 2]]
+  bneck: [2]
+  branches: [4]
+  order: ["rnc"]
+  norm: ["bnorm"]
+  activ: ["leaky"]
+  attn_msk: ["softmax"]
+train:
+  xs:
+    dat:
+  ys:
+    lbl:
+      mask:
+        name: ["weights"]
+        remove_bg: [True] # this is ignored
+        mask_weight: [1] # this is ignored
+        output_weight: [5] # this is ignored
+        pos_cls_weight: [5]
+      head: ["encoder_classifier"]
+      n_classes: [1]
+      loss: ["sce"]
+      metric: ["bacc"]
+  trainer:
+    seed: [0]
+    n_folds: [1]
+    batch_size: [5]
+    iters: [1000]
+    steps: [100]
+    valid_freq: [5]
+    lr: [1e-4]
+    lr_alpha: [0.25] # range [0, 1]
+    lr_decay: [0.97] # range (0, 1]
+    callbacks: [["checkpoint", "lr_scheduler", "tensorboard"]]

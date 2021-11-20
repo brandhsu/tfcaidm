@@ -1,0 +1,39 @@
+_id:
+  project: xr/pna
+  version: null
+_db: /data/ymls/db-sum-pub-01k-512.yml
+batch:
+  fold: 0
+  size: 8
+  sampling:
+    cohort-neg: 0.5
+    cohort-pna: 0.5
+specs:
+  xs:
+    dat:
+      dtype: float32
+      loads: dat-512
+      norms:
+        shift: "@mean"
+        scale: "@std"
+      rands:
+        shift:
+          lower: 0.9
+          upper: 1.1
+        scale:
+          lower: 0.9
+          upper: 1.1
+      shape: [1, 512, 512, 1]
+    msk:
+      dtype: float32
+      loads: lng-512
+      norms: null
+      shape: [1, 512, 512, 1]
+  ys:
+    pna:
+      dtype: uint8
+      loads: pna-512
+      norms: null
+      shape: [1, 512, 512, 1]
+  load_kwargs:
+    verbose: false

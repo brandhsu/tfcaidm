@@ -1,0 +1,36 @@
+_id:
+  project: adni
+  version: null
+_db: /data/ymls/db-sum-3d.yml
+batch:
+  size: 4
+  fold: 0
+  sampling:
+    AD: 0.5
+    CN: 0.5
+specs:
+  xs:
+    dat:
+      dtype: float32
+      loads: dat-96x128
+      norms:
+        shift: "@mean"
+        scale: "@std"
+        rands:
+          shift:
+            lower: 0.8
+            upper: 1.2
+          scale:
+            lower: 0.8
+            upper: 1.2
+      shape: [96, 160, 160, 1]
+    weights:
+      dtype: float32
+      loads: null
+      norms: null
+      shape: [1, 1, 1, 1]
+  ys:
+    lbl:
+      dtype: uint8
+      loads: AD
+      shape: [1, 1, 1, 1]
