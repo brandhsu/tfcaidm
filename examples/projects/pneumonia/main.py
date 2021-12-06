@@ -1,4 +1,3 @@
-import setup
 from jarvis.train import params
 from jarvis.utils.general import gpus
 from tfcaidm import Trainer
