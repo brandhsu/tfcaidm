@@ -176,7 +176,7 @@ trainer.save_results(results)
 
 <br>
 
-For an example project, see `examples/projects`. For a more detailed walkthrough of the library, see `notebooks`.
+For an example project, see [`examples/projects`](https://github.com/Brandhsu/tfcaidm/tree/master/examples/projects). For a more detailed walkthrough of the library, see [`notebooks`](https://github.com/Brandhsu/tfcaidm/tree/master/notebooks).
 
 ---
 
