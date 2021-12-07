@@ -1,4 +1,4 @@
-__version__ = "0.0.0a1"
+__version__ = "0.0.0a3"
 
 from tfcaidm.data.dataset import Dataset
 from tfcaidm.data.jclient import JClient

@@ -4,11 +4,15 @@
     <img src="https://raw.githubusercontent.com/Brandhsu/tfcaidm/master/docs/images/tensor.png" height="240" width="284" alt="TFCAIDM Tensor">
     <h4>TensorFlow CAIDM</h4>
     Deep learning pipeline for medical imaging
-    <br><br>
+    <p align="center">
+        <a href="https://github.com/Brandhsu/tfcaidm/blob/master/docs/slides/tfcaidm.pdf">Slides</a> | 
+        <a href="https://github.com/Brandhsu/tfcaidm/blob/master/LICENSE">License</a>
+    </p>
     <img src="https://badgen.net/pypi/v/tfcaidm">
     <img src="https://badgen.net/pypi/python/tfcaidm">
     <img src="https://badgen.net/github/license/brandhsu/tfcaidm">
     <img src="https://badgen.net/badge/code%20style/black?color=black">
+
 </div>
 
 ---
