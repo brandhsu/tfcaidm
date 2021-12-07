@@ -1,5 +1,3 @@
-# TFCAIDM
-
 <div align="center">
     <img src="https://raw.githubusercontent.com/Brandhsu/tfcaidm/master/docs/images/tensor.png" height="240" width="284" alt="TFCAIDM Tensor">
     <h4>TensorFlow CAIDM</h4>
