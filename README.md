@@ -3,6 +3,7 @@
     <h4>TensorFlow CAIDM</h4>
     Deep learning pipeline for medical imaging
     <p align="center">
+        <a href="https://brandhsu.github.io/tfcaidm-site/">Site</a> | 
         <a href="https://github.com/Brandhsu/tfcaidm/blob/master/docs/slides/tfcaidm.pdf">Slides</a> | 
         <a href="https://github.com/Brandhsu/tfcaidm/blob/master/LICENSE">License</a>
     </p>
