@@ -1,5 +1,3 @@
-import setup
-
 import numpy as np
 import tensorflow as tf
 from tensorflow import optimizers

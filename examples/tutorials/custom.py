@@ -1,7 +1,3 @@
-from __init__ import set_path
-
-set_path()
-
 from pprint import pprint
 from jarvis.utils.general import overload
 
