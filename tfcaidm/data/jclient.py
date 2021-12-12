@@ -75,9 +75,6 @@ class JClient(HyperParameters, Client):
 
         return {"train": f"{train:,}", "valid": f"{valid:,}"}
 
-    def augmentation(self, arrays, hyperparams, **kwargs):
-        return arrays
-
     def apply_preprocess(self, xs, ys, row, key, params, **kwargs):
         """Applies additional feature preprocessing
 
@@ -116,8 +113,8 @@ class JClient(HyperParameters, Client):
         for entry in hyperparams:
             params = hyperparams[entry]
             if params is not None:
-                
-                for key in params: 
+
+                for key in params:
                     if type(params[key]) == dict:
                         name = params[key]["name"]
 
@@ -148,9 +145,6 @@ class JClient(HyperParameters, Client):
         # --- Extract input / output fields
         inputs = self.hyperparams["train"]["xs"]
         outputs = self.hyperparams["train"]["ys"]
-
-        # --- Additional custom data augmentation
-        arrays = self.augmentation(arrays, self.hyperparams, **kwargs)
 
         # --- Get `ys` from `xs`
         xs = arrays["xs"]

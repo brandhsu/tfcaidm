@@ -45,7 +45,7 @@ class BalancedAccuracy(layers.Layer):
         y_pred,
         weights=None,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_metric=True,
         **kwargs,
     ):
@@ -62,8 +62,8 @@ class BalancedAccuracy(layers.Layer):
         fn = reduce(true * (1 - pred))
         tn = reduce((1 - true) * (1 - pred))
 
-        sens = tp / (tp + fn)
-        spec = tn / (tn + fp)
+        sens = tp / (tp + fn + epsilon)
+        spec = tn / (tn + fp + epsilon)
 
         A = sens + spec
         B = 2

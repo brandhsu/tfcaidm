@@ -11,6 +11,7 @@ class SparseCategoricalCrossentropy(layers.Layer):
     def __init__(self, name="SparseCategoricalCrossentropy", **kwargs):
         super(SparseCategoricalCrossentropy, self).__init__(name=name, **kwargs)
         self.loss = losses.SparseCategoricalCrossentropy(from_logits=True)
+        self.loss_name = name
 
     def call(self, y_true, y_pred, weights=None, add_loss=True, **kwargs):
         loss = self.loss(
@@ -21,6 +22,7 @@ class SparseCategoricalCrossentropy(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -31,6 +33,7 @@ class WeightedCategoricalCrossentropy(layers.Layer):
     def __init__(self, name="WeightedCategoricalCrossentropy", **kwargs):
         super(WeightedCategoricalCrossentropy, self).__init__(name=name, **kwargs)
         self.loss = tf.nn.weighted_cross_entropy_with_logits
+        self.loss_name = name
 
     def call(
         self, y_true, y_pred, weights=None, class_of_interest=1, add_loss=True, **kwargs
@@ -52,5 +55,6 @@ class WeightedCategoricalCrossentropy(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss

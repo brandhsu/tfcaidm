@@ -12,6 +12,7 @@ class TverskyLoss(layers.Layer):
 
     def __init__(self, name="TverskyLoss", **kwargs):
         super(TverskyLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -20,7 +21,7 @@ class TverskyLoss(layers.Layer):
         weights=None,
         alpha=0.3,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_loss=True,
         **kwargs,
     ):
@@ -57,6 +58,7 @@ class TverskyLoss(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -66,6 +68,7 @@ class FocalTverskyLoss(TverskyLoss):
 
     def __init__(self, name="FocalTverskyLoss", **kwargs):
         super(FocalTverskyLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -75,7 +78,7 @@ class FocalTverskyLoss(TverskyLoss):
         alpha=0.3,
         gamma=0.75,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_loss=True,
         **kwargs,
     ):
@@ -95,5 +98,6 @@ class FocalTverskyLoss(TverskyLoss):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss

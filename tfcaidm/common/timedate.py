@@ -14,6 +14,10 @@ def get_date():
     return date.strftime(constants.date_format)
 
 
+def get_mdy():
+    return datetime.strptime(get_date(), constants.date_format).strftime("%b %d, %Y")
+
+
 def timediff(end, start):
     """Measure the time difference between two datetime objects
 

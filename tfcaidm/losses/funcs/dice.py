@@ -14,6 +14,7 @@ class DiceLoss(layers.Layer):
 
     def __init__(self, name="DiceLoss", **kwargs):
         super(DiceLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -21,7 +22,7 @@ class DiceLoss(layers.Layer):
         y_pred,
         weights=None,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_loss=True,
         **kwargs,
     ):
@@ -43,6 +44,7 @@ class DiceLoss(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -52,6 +54,7 @@ class LogCoshDiceLoss(DiceLoss):
 
     def __init__(self, name="LogCoshDiceLoss", **kwargs):
         super(LogCoshDiceLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -59,7 +62,7 @@ class LogCoshDiceLoss(DiceLoss):
         y_pred,
         weights=None,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_loss=True,
         **kwargs,
     ):
@@ -78,6 +81,7 @@ class LogCoshDiceLoss(DiceLoss):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -87,6 +91,7 @@ class DiceCrossentropyLoss(SparseCategoricalCrossentropy, DiceLoss):
 
     def __init__(self, name="DiceCrossentropyLoss", **kwargs):
         super(DiceCrossentropyLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -94,7 +99,7 @@ class DiceCrossentropyLoss(SparseCategoricalCrossentropy, DiceLoss):
         y_pred,
         weights=None,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         alpha=0.5,
         add_loss=True,
         **kwargs,
@@ -120,6 +125,7 @@ class DiceCrossentropyLoss(SparseCategoricalCrossentropy, DiceLoss):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -129,6 +135,7 @@ class MultiDiceLoss(DiceLoss):
 
     def __init__(self, name="MultiDiceLoss", **kwargs):
         super(MultiDiceLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -136,7 +143,7 @@ class MultiDiceLoss(DiceLoss):
         y_pred,
         weights=None,
         classes_of_interest=[0, 1],
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_loss=True,
         **kwargs,
     ):
@@ -159,5 +166,6 @@ class MultiDiceLoss(DiceLoss):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss

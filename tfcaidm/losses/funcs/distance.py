@@ -10,6 +10,7 @@ class MeanAbsoluteError(layers.Layer):
     def __init__(self, name="MeanAbsoluteError", **kwargs):
         super(MeanAbsoluteError, self).__init__(name=name, **kwargs)
         self.loss = losses.MeanAbsoluteError()
+        self.loss_name = name
 
     def call(self, y_true, y_pred, weights=None, add_loss=True, **kwargs):
         loss = self.loss(
@@ -20,6 +21,7 @@ class MeanAbsoluteError(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss
 
@@ -30,6 +32,7 @@ class MeanSquaredError(layers.Layer):
     def __init__(self, name="MeanSquaredError", **kwargs):
         super(MeanSquaredError, self).__init__(name=name, **kwargs)
         self.loss = losses.MeanSquaredError()
+        self.loss_name = name
 
     def call(self, y_true, y_pred, weights=None, add_loss=True, **kwargs):
         loss = self.loss(
@@ -40,5 +43,6 @@ class MeanSquaredError(layers.Layer):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss

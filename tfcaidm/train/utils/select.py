@@ -11,4 +11,13 @@ def callback_selection(hyperparams):
     # --- Extract hyperparams from params csv
     cbacks = hyperparams["train"]["trainer"]["callbacks"]
 
-    return [callbacks[k] for k in cbacks if k in callbacks]
+    funcs = []
+
+    # --- Get callback functions
+    for cback in cbacks:
+        if cback not in callbacks:
+            raise ValueError(f"ERROR! Trainer callback `{cback}` is not defined!")
+
+        funcs.append(callbacks[cback])
+
+    return funcs

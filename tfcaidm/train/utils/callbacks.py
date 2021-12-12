@@ -1,7 +1,11 @@
 """Model.fit compatible callbacks"""
 
 import os
+from pathlib import Path
+from collections.abc import Iterable
+
 from tensorflow.keras import callbacks
+from tensorboard.plugins.hparams import api as hp
 
 
 def lr_scheduler(hyperparams):
@@ -33,9 +37,19 @@ def model_checkpoints(hyperparams):
     )
 
 
+def hparams_init(hyperparams):
+    # --- Create log_dir
+    log_dir = hyperparams["train"]["trainer"]["log_dir"]
+    log_dir += "/logdirs/" + f"run_{Path(log_dir).stem}"
+
+    return hp.KerasCallback(log_dir, fmt(hyperparams["model"]))
+
+
 def tensorboard_init(hyperparams):
     # --- Create output_dir
-    log_dir = hyperparams["train"]["trainer"]["log_dir"] + "/logdirs/"
+    log_dir = hyperparams["train"]["trainer"]["log_dir"]
+    log_dir += "/logdirs/" + f"run_{Path(log_dir).stem}"
+
     return callbacks.TensorBoard(log_dir=log_dir)
 
 
@@ -54,7 +68,7 @@ def reduce_lr(hyperparams, **kwargs):
         min_delta=0.0001,
         cooldown=0,
         min_lr=0,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -68,3 +82,14 @@ def early_stop(hyperparams, **kwargs):
         baseline=None,
         restore_best_weights=False,
     )
+
+
+def fmt(hyperparams):
+    return {k: fmt_iter(v) for k, v in hyperparams.items()}
+
+
+def fmt_iter(item):
+    if isinstance(item, Iterable):
+        return str(item)
+    else:
+        return item

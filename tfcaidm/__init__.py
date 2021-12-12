@@ -1,5 +1,6 @@
-__version__ = "0.0.0a3"
+__version__ = "0.0.0a4"
 
+from tfcaidm.benchmarks.benchmark import Benchmark
 from tfcaidm.data.dataset import Dataset
 from tfcaidm.data.jclient import JClient
 from tfcaidm.jobs.job import Jobs

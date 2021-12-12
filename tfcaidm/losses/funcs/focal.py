@@ -12,6 +12,7 @@ class FocalLoss(WeightedCategoricalCrossentropy):
 
     def __init__(self, name="FocalLoss", **kwargs):
         super(FocalLoss, self).__init__(name=name, **kwargs)
+        self.loss_name = name
 
     def call(
         self,
@@ -20,7 +21,6 @@ class FocalLoss(WeightedCategoricalCrossentropy):
         weights=None,
         gamma=2.0,
         class_of_interest=1,
-        epsilon=1e-6,
         add_loss=True,
         **kwargs,
     ):
@@ -49,5 +49,6 @@ class FocalLoss(WeightedCategoricalCrossentropy):
 
         if add_loss:
             self.add_loss(loss)
+            self.add_metric(loss, name=self.loss_name)
 
         return loss

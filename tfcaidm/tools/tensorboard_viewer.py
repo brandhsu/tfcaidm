@@ -19,10 +19,10 @@ def tensorboard_viewer(run_path, port):
 
     for exp in exps:
         if os.path.isdir(run_path / exp):
-            cmd += exp + ":" + run_path + "/" + exp + "/" + "logdirs" + ","
+            cmd += exp + ":" + str(run_path) + "/" + exp + "/" + "logdirs" + ","
 
     cmd = cmd[:-1]
-    cmd += " --bind_all --port " + port
+    cmd += f" --bind_all --port {port}"
     print("\n- command: {}\n".format(cmd))
     os.system(cmd)
 

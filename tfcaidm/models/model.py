@@ -3,6 +3,7 @@
 from tensorflow import optimizers
 from tensorflow.keras import Input, Model as TFModel, models as TFmodels
 
+from tfcaidm.common.constants import DELIM
 from tfcaidm.models.utils import select as model_select
 from tfcaidm.common.reproducibility import set_determinism
 
@@ -77,3 +78,42 @@ class Model:
             compile=compile,
             custom_objects=custom_objects,
         )
+
+    @staticmethod
+    def inference_mode(model, inputs, outputs):
+        inputs = inference_inputs(model, names=inputs)
+        outputs = inference_outputs(model, names=outputs)
+
+        return TFModel(inputs=inputs, outputs=outputs)
+
+
+def inference_inputs(model, names=[]):
+    inputs = {}
+
+    for name in names:
+        n = {k.name: k for k in model.inputs}
+        x = {k: v for k, v in n.items() if name == k}
+
+        err = f"ERROR! Input `{name}` is not defined in model inputs"
+        assert x, f"{err} {list(n.keys())}"
+
+        inputs.update(x)
+
+    return inputs
+
+
+def inference_outputs(model, names=[], contains="logits"):
+    outputs = {}
+
+    get_name = lambda s: s.split(DELIM)[0]
+
+    for name in names:
+        n = {get_name(k.name): k for k in model.outputs if contains in k.name}
+        y = {k: v for k, v in n.items() if name == k}
+
+        err = f"ERROR! Output `{name}` is not defined in model outputs"
+        assert y, f"{err}  {list(n.keys())}"
+
+        outputs.update(y)
+
+    return outputs

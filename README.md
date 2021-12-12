@@ -25,20 +25,20 @@
 
 <summary>Available Features</summary>
 
-- [`Reusable state-of-the-art deep learning model blocks`](https://github.com/Brandhsu/tfcaidm-pkg/blob/main/docs/tfcaidm/models/MODEL.md)
-- `Support for training multiple models in parallel`
-- `High-level interface for customizing datasets, models, loss functions, training routines, etc.`
-- `Reproducibility, performance logging, model checkpointing, and hyperparameter tracking`
+- [Reusable state-of-the-art deep learning model blocks](https://github.com/Brandhsu/tfcaidm-pkg/blob/main/docs/tfcaidm/models/MODEL.md)
+- Support for training multiple models in parallel
+- High-level interface for customizing datasets, models, loss functions, training routines, etc.
+- Reproducibility, performance logging, model checkpointing, and hyperparameter tracking
 </details>
 
 <details>
 
 <summary>Upcoming Features</summary>
 
-- `AutoML / efficient hyperparameter search`
-- `Distributed data and model training`
-- `Vision transformer models`
-- `Better documentation`
+- AutoML / efficient hyperparameter search
+- Distributed data and model training
+- Vision transformer models
+- Better documentation
 
 </details>
 
@@ -46,12 +46,12 @@
 
 <summary>More Information</summary>
 
-- `YAML configuration files`
-- `Hyperparameter tuning`
-- `Supported models`
-- `Customizability`
-- `Viewing results`
-- `Benchmarks (coming soon)`
+- YAML configuration files
+- Hyperparameter tuning
+- Supported models
+- Customizability
+- Viewing results
+- Benchmarks (coming soon)
 
 </details>
 
@@ -178,7 +178,7 @@ trainer.save_results(results)
 
 <br>
 
-For an example project, see `examples/projects`. For a more detailed walkthrough of the library, see `notebooks`.
+For an example project, see [examples/projects](https://github.com/Brandhsu/tfcaidm/tree/master/examples/projects). For a more detailed walkthrough of the library, see [notebooks](https://github.com/Brandhsu/tfcaidm/tree/master/notebooks).
 
 ---
 

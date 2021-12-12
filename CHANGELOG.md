@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.0a5] - TBD
+
+### Added
+
+- Add benchmarking module with site available at [tfcaidm-site](https://brandhsu.github.io/tfcaidm-site/)
+
+## [0.0.0a4] - 2021-12-12
+
+### Added
+
+- Add tensorboard hyperparameter logging
+- Add identifiable loss names during training
+- Add model inference method for filtering inputs and outputs
+
 ## [0.0.0a3] - 2021-11-23
 
 ### Added

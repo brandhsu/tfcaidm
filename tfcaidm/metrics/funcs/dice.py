@@ -30,7 +30,7 @@ class DiceScore(layers.Layer):
         y_pred,
         weights=None,
         class_of_interest=1,
-        epsilon=1e-6,
+        epsilon=1e-9,
         add_metric=True,
         **kwargs,
     ):
