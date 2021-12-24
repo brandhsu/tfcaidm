@@ -158,15 +158,22 @@ class JClient(HyperParameters, Client):
 
         return arrays
 
-    def create_generator(self, gen_data):
+    def train_generator(self, gen_data, **kwargs):
         for xs, ys in gen_data:
             yield xs, ys
+
+    def eval_generator(self, gen_data, **kwargs):
+        return self.train_generator(gen_data, **kwargs)
 
     def create_generators(self, arr=None, test=False, **kwargs):
         if arr is None:
             gen_train, gen_valid = Client.create_generators(self, test=test, **kwargs)
-            gen_train = self.create_generator(gen_train)
-            gen_valid = self.create_generator(gen_valid)
+            if test:
+                gen_train = self.eval_generator(gen_train, **kwargs)
+                gen_valid = self.eval_generator(gen_valid, **kwargs)
+            else:
+                gen_train = self.train_generator(gen_train, **kwargs)
+                gen_valid = self.train_generator(gen_valid, **kwargs)
             yield from (gen_train, gen_valid)
 
         else:

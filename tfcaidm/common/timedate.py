@@ -1,15 +1,16 @@
 """Tools to get or measure time"""
 
+import os
 import time
 import pytz
-import datetime
+from datetime import datetime
 from pytz import timezone
 
 import tfcaidm.common.constants as constants
 
 
 def get_date():
-    date = datetime.datetime.now(tz=pytz.utc)
+    date = datetime.now(tz=pytz.utc)
     date = date.astimezone(timezone("US/Pacific"))
     return date.strftime(constants.date_format)
 
@@ -29,8 +30,8 @@ def timediff(end, start):
         string: time difference as a string
     """
 
-    end_date = datetime.datetime.strptime(end, constants.date_format)
-    start_date = datetime.datetime.strptime(start, constants.date_format)
+    end_date = datetime.strptime(end, constants.date_format)
+    start_date = datetime.strptime(start, constants.date_format)
 
     return end_date - start_date
 

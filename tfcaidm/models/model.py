@@ -30,7 +30,9 @@ class Model:
         return model_select.task_selection(features, self.data, self.client)
 
     def assemble(self, inputs, outputs):
-        return TFModel(inputs=inputs, outputs=outputs)
+        return TFModel(
+            inputs=inputs, outputs=outputs, name=self.hyperparams["model"]["model"]
+        )
 
     def build(self, input_name=None):
         """Build entire model"""

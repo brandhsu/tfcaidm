@@ -1,4 +1,4 @@
-__version__ = "0.0.0a4"
+from tfcaidm.version import __version__
 
 from tfcaidm.benchmarks.benchmark import Benchmark
 from tfcaidm.data.dataset import Dataset

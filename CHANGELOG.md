@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.0a5] - TBD
+## [0.0.0a5] - 2021-12-24
 
 ### Added
 
-- Add benchmarking module with site available at [tfcaidm-site](https://brandhsu.github.io/tfcaidm-site/)
+- Add model benchmarking to the caidm clusters, site available at [tfcaidm-site](https://brandhsu.github.io/tfcaidm-site/)
+- Add helper functions in [tfcaidm.model](https://github.com/Brandhsu/tfcaidm/blob/master/tfcaidm/models/model.py) for streamlined model inference
+
+### Deprecated
+
+- Deprecated method `create_generator` in [tfcaidm.JClient](https://github.com/Brandhsu/tfcaidm/blob/master/tfcaidm/data/jclient.py) in favor of distinct generators for training (`model.fit`) and model evaluation (`model.eval`). These methods are now called `train_generator` and `eval_generator`, for any projects `@overloading create_generator` please make the necessary project changes. The default behavior of `eval_generator` is the same as `train_generator`.
 
 ## [0.0.0a4] - 2021-12-12
 

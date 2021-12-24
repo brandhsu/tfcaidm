@@ -1,6 +1,6 @@
 ## Models
 
-<strong>TFCAIDM</strong> offers various model architectures to use.
+<strong>TFCAIDM</strong> offers a variety of predefined model architectures and blocks. User's are free to use and train these pre-existing models, or extend them, or define their own.
 
 <details>
 <summary>Available Models</summary>

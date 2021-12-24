@@ -18,7 +18,9 @@
 
 ## Introduction
 
-<strong>[TFCAIDM](https://pypi.org/project/tfcaidm/)</strong> is a unified framework for building and training medical imaging deep learning models built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments. User's can train or extend pre-existing models that have been implemented in `MODEL_ZOO.md` or define their own.
+<strong>[TFCAIDM](https://pypi.org/project/tfcaidm/)</strong> is a unified framework for building and training medical imaging deep learning models built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments.
+
+For all project updates, check out [CHANGELOG.md](https://github.com/Brandhsu/tfcaidm/blob/master/CHANGELOG.md).
 
 <details>
 
@@ -50,7 +52,7 @@
 - Supported models
 - Customizability
 - Viewing results
-- Benchmarks (coming soon)
+- [Benchmarks](https://brandhsu.github.io/tfcaidm-site/benchmarks) (available only @ caidm cluster)
 
 </details>
 
@@ -147,7 +149,7 @@ hyperparams = params.load()
 
 # --- Setup custom dataset generator (more details in notebooks)
 @overload(JClient)
-def create_generator(self, gen_data):
+def train_generator(self, gen_data, **kwargs):
     for xs, ys in gen_data:
 
         # --- User defined code

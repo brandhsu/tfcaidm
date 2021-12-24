@@ -22,11 +22,9 @@ def experiment_comparison(project_path):
 
     results = [
         (csv_path / f)
-        for f in list(
-            filter(
-                lambda f: f.split("_")[-1] == "results.csv",
-                csvs,
-            )
+        for f in filter(
+            lambda f: f.split("_")[-1] == "results.csv",
+            csvs,
         )
     ]
 
