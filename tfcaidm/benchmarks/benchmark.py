@@ -37,12 +37,7 @@ class Benchmark:
         self.dataset = dataset
         self.specs = Specs(metadata.specs(dataset))
         self.path = metadata.yaml_path(self.specs.specs)
-        self.client = Client(
-            self.path,
-            configs={
-                "batch": {"size": 1, "fold": metadata.FOLD},
-            },
-        )
+        self.configs = {"batch": {"size": 1, "fold": metadata.FOLD}}
 
         self._results = []
 
@@ -56,7 +51,8 @@ class Benchmark:
 
     def yield_data(self):
         """Yield a sample data, target pair"""
-        _, valid = self.client.create_generators(test=True)
+        client = Client(self.path, configs=self.configs)
+        _, valid = client.create_generators(test=True)
         xs, ys = next(valid)
         return xs, ys
 
@@ -90,11 +86,11 @@ class Benchmark:
 
     def run(self, model, **kwargs):
         results = []
-        _, gen_data = self.client.create_generators(test=True)
+
+        client = Client(self.path, configs=self.configs)
+        _, gen_data = client.create_generators(test=True)
 
         for xs, ys in gen_data:
-            if ys:
-                xs = {**xs, **ys}
 
             name = model.output_names
             pred = self.infer(model, xs, **kwargs)
@@ -114,7 +110,7 @@ class Benchmark:
         self.model_name = model.name
         self.num_params = f"{model.count_params():,}"
 
-        return self._results
+        return {self.specs.metric_name: self._results}
 
     def _score(self):
         return self.specs.metrics()
@@ -142,7 +138,7 @@ class Benchmark:
         save_to_csv(schema, path)
 
         print(
-            f"- congratulations your run with a score of {self._results:.3f} has been submitted!"
+            f"- congratulations your run with a(n) {self.specs.metric_name} of {self._results:.3f} has been submitted!"
         )
 
     @classmethod
@@ -200,7 +196,8 @@ class Benchmark:
         if dataset is not None:
             schema = [schema[dataset]]
 
-        print(f"CAIDM Benchmark Datasets - updated Dec 15, 2021")
+        path = metadata.CAIDM_CONFIG["datasets"]
+        print(f"CAIDM Benchmark Datasets - updated {os.path.getmtime(path)}")
 
         return pd.DataFrame(schema)
 

@@ -9,16 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.0a5] - 2021-12-24
+## [0.0.0a6] - TBD
+
+- Multi-class support for all loss functions and metrics
+
+## [0.0.0a5] - 2021-12-26
 
 ### Added
 
 - Add model benchmarking to the caidm clusters, site available at [tfcaidm-site](https://brandhsu.github.io/tfcaidm-site/)
-- Add helper functions in [tfcaidm.model](https://github.com/Brandhsu/tfcaidm/blob/master/tfcaidm/models/model.py) for streamlined model inference
+- Add distinct generators for training (`model.fit`) and model evaluation (`model.eval`). These methods are now called `train_generator` and `eval_generator`. As previously, the `create_generator` applies the same modification to both `train_generator` and `eval_generator`.
 
-### Deprecated
+### Removed
 
-- Deprecated method `create_generator` in [tfcaidm.JClient](https://github.com/Brandhsu/tfcaidm/blob/master/tfcaidm/data/jclient.py) in favor of distinct generators for training (`model.fit`) and model evaluation (`model.eval`). These methods are now called `train_generator` and `eval_generator`, for any projects `@overloading create_generator` please make the necessary project changes. The default behavior of `eval_generator` is the same as `train_generator`.
+- Removed `pytz` dependency
 
 ## [0.0.0a4] - 2021-12-12
 

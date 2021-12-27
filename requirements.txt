@@ -1,7 +1,6 @@
 matplotlib
 numpy
 pandas
-pytz
 ruamel.yaml==0.17.17
 scikit-learn
 scipy

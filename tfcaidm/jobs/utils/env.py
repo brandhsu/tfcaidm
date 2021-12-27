@@ -2,20 +2,10 @@
 
 
 import os
-import pytz
 import getpass
 import inspect
-from datetime import datetime
 
-
-def get_pst_time():
-    """Function to get PDT time and date in 12hr format"""
-    date_format = "%m_%d_%Y_%H_%M_%S_%Z"
-    date_format = "%b %d %Y %-I:%M %p"
-    date = datetime.now(tz=pytz.utc)
-    date = date.astimezone(pytz.timezone("US/Pacific"))
-    pstDateTime = date.strftime(date_format)
-    return pstDateTime
+from tfcaidm.common import timedate
 
 
 def setup(user, param_path, row_id, python_path, log_dir, **kwargs):
@@ -30,7 +20,7 @@ def setup(user, param_path, row_id, python_path, log_dir, **kwargs):
     """
 
     env = f"""
-        echo "{get_pst_time()}" > {log_dir}/stdout
+        echo "{timedate.get_date()}" > {log_dir}/stdout
 
         export JARVIS_PATH_CONFIGS=/home/{user}/.jarvis
         export JARVIS_PARAMS_CSV={param_path}
