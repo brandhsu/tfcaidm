@@ -19,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add model benchmarking to the caidm clusters, site available at [tfcaidm-site](https://brandhsu.github.io/tfcaidm-site/)
 - Add distinct generators for training (`model.fit`) and model evaluation (`model.eval`). These methods are now called `train_generator` and `eval_generator`. As previously, the `create_generator` applies the same modification to both `train_generator` and `eval_generator`.
-- Add ability to reload the client and training pipeline from a yaml file.
 
 ### Removed
 
