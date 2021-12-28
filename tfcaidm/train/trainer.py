@@ -21,11 +21,11 @@ class Trainer(HyperParameters):
     @classmethod
     def from_yaml(cls, path):
         hyperparams = Config.load_yaml(path)
-        cls.__init__(cls, hyperparams)
+        self = cls(hyperparams)
         print(
             f"WARNING! Training results such as model files or tensorboard logs may be overwritten!"
         )
-        return cls
+        return self
 
     def cross_validation(self, n_folds=None, save=False, callbacks=[]):
         """K-fold cross validation (up to K=5)

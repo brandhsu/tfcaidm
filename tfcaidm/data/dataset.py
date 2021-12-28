@@ -26,5 +26,5 @@ class Dataset(HyperParameters):
     @classmethod
     def from_yaml(cls, path, fold):
         hyperparams = Config.load_yaml(path)
-        cls.__init__(cls, hyperparams)
-        return cls.get_client(fold)
+        self = cls(hyperparams)
+        return self.get_client(fold)
