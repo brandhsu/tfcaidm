@@ -5,12 +5,6 @@ import tfcaidm.losses.custom.registry as registry
 
 
 class Loss:
-    def __init__(self):
-        pass
-
-    def create(self):
-        pass
-
     @classmethod
     def add_loss(
         self, y_true, y_pred, output_name, loss_name, *, alpha=0.5, weights=None

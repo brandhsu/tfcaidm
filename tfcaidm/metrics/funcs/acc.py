@@ -4,29 +4,26 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras import metrics
 
-
-reduce = lambda x: tf.math.reduce_sum(x)
+from tfcaidm.metrics.metric import MetricUtils
 
 
 class Accuracy(layers.Layer):
     def __init__(self, name="Accuracy", **kwargs):
         super(Accuracy, self).__init__(name=name, **kwargs)
-        self.metric = metrics.Accuracy()
+        self.multis = metrics.Accuracy()
+        self.binary = metrics.BinaryAccuracy()
 
     def call(
         self,
         y_true,
         y_pred,
         weights=None,
-        class_of_interest=1,
         add_metric=True,
         **kwargs,
     ):
 
-        true = tf.cast(y_true[..., 0] == class_of_interest, tf.float32)
-        pred = tf.cast(tf.math.argmax(y_pred, axis=-1) == class_of_interest, tf.float32)
-
-        metric = self.metric(y_true=true, y_pred=pred, sample_weight=weights)
+        func = self.multis if y_pred.shape > 1 else self.binary
+        metric = func(y_true=y_true, y_pred=y_pred, sample_weight=weights)
 
         if add_metric:
             self.add_metric(metric, name=self.metric.name)
@@ -37,40 +34,25 @@ class Accuracy(layers.Layer):
 class BalancedAccuracy(layers.Layer):
     def __init__(self, name="BalancedAccuracy", **kwargs):
         super(BalancedAccuracy, self).__init__(name=name, **kwargs)
-        self.metric_name = name
+        self.multis = metrics.Accuracy()
+        self.binary = metrics.BinaryAccuracy()
 
     def call(
         self,
         y_true,
         y_pred,
         weights=None,
-        class_of_interest=1,
-        epsilon=1e-9,
         add_metric=True,
         **kwargs,
     ):
 
-        true = tf.cast(y_true[..., 0] == class_of_interest, tf.float32)
-        pred = tf.cast(tf.math.argmax(y_pred, axis=-1) == class_of_interest, tf.float32)
+        balanc_weight = MetricUtils.inverse_class_weights(y_true)
+        sample_weight = MetricUtils.tf_f32(weights != 0) * balanc_weight
 
-        if weights is not None:
-            true *= tf.cast(weights[..., 0] != 0, tf.float32)
-            pred *= tf.cast(weights[..., 0] != 0, tf.float32)
-
-        tp = reduce(true * pred)
-        fp = reduce((1 - true) * pred)
-        fn = reduce(true * (1 - pred))
-        tn = reduce((1 - true) * (1 - pred))
-
-        sens = tp / (tp + fn + epsilon)
-        spec = tn / (tn + fp + epsilon)
-
-        A = sens + spec
-        B = 2
-
-        metric = A / B
+        func = self.multis if y_pred.shape > 1 else self.binary
+        metric = func(y_true=y_true, y_pred=y_pred, sample_weight=sample_weight)
 
         if add_metric:
-            self.add_metric(metric, name=self.metric_name)
+            self.add_metric(metric, name=self.metric.name)
 
         return metric

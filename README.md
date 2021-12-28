@@ -1,7 +1,7 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/Brandhsu/tfcaidm/master/docs/images/tensor.png" height="240" width="284" alt="TFCAIDM Tensor">
     <h4>TensorFlow CAIDM</h4>
-    Deep learning pipeline for medical imaging
+    Deep learning library for medical imaging
     <p align="center">
         <a href="https://brandhsu.github.io/tfcaidm-site/">Site</a> | 
         <a href="https://github.com/Brandhsu/tfcaidm/blob/master/docs/slides/tfcaidm.pdf">Slides</a> | 
@@ -18,7 +18,7 @@
 
 ## Introduction
 
-<strong>[TFCAIDM](https://pypi.org/project/tfcaidm/)</strong> is a unified framework for building and training medical imaging deep learning models built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments.
+<strong>[TFCAIDM](https://pypi.org/project/tfcaidm/)</strong> is a unified framework for building and training medical imaging deep learning models for large scale experimentation built on top of [TensorFlow](https://www.tensorflow.org/) and [JarvisMD](https://pypi.org/project/jarvis-md/). The library supports interfacing custom datasets with `jarvis`, model development with `tensorflow`, and built-in reproducibility, traceability, and performance logging for all experiments.
 
 For all project updates, check out [CHANGELOG.md](https://github.com/Brandhsu/tfcaidm/blob/master/CHANGELOG.md).
 
