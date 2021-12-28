@@ -7,6 +7,7 @@ from pathlib import Path
 import tfcaidm.common.timedate as timedate
 from tfcaidm.models.model import Model
 from tfcaidm.data.dataset import Dataset
+from tfcaidm.jobs.utils.config import Config
 from tfcaidm.jobs.utils.params import HyperParameters
 from tfcaidm.train.utils.select import callback_selection
 from tfcaidm.train.utils.summary import Summary, save_results
@@ -16,6 +17,15 @@ class Trainer(HyperParameters):
     def __init__(self, hyperparams):
         HyperParameters.__init__(self, hyperparams)
         self.timestamp = timedate.get_date()
+
+    @classmethod
+    def from_yaml(cls, path):
+        hyperparams = Config.load_yaml(path)
+        cls.__init__(cls, hyperparams)
+        print(
+            f"WARNING! Training results such as model files or tensorboard logs may be overwritten!"
+        )
+        return cls
 
     def cross_validation(self, n_folds=None, save=False, callbacks=[]):
         """K-fold cross validation (up to K=5)

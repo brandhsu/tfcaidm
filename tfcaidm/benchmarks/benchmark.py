@@ -85,28 +85,33 @@ class Benchmark:
         return model(xs)
 
     def run(self, model, **kwargs):
-        results = []
+        true = []
+        pred = []
 
         client = Client(self.path, configs=self.configs)
         _, gen_data = client.create_generators(test=True)
+        lbl = self.specs.output_name
 
         for xs, ys in gen_data:
+            yh = self.infer(model, xs, **kwargs)
 
-            name = model.output_names
-            pred = self.infer(model, xs, **kwargs)
+            if type(yh) != dict:
+                name = model.output_names
+                yh = {k: v.numpy() for k, v in zip(name, yh)}
 
-            if type(pred) != dict:
-                pred = {k: v.numpy() for k, v in zip(name, pred)}
+            self.check(ys, yh)
 
-            self.check(ys, pred)
+            y_true = ys[lbl]
+            y_pred = yh[lbl]
 
-            y_true = ys[self.specs.output_name]
-            y_pred = pred[self.specs.output_name]
+            true.append(y_true)
+            pred.append(y_pred)
 
-            result = self._score()(y_true, y_pred)
-            results.append(result)
+        true = np.concatenate(true, axis=1)
+        pred = np.concatenate(pred, axis=1)
+        result = self._score()(true, pred)
 
-        self._results = float(np.array(results).mean())
+        self._results = result
         self.model_name = model.name
         self.num_params = f"{model.count_params():,}"
 
@@ -197,7 +202,8 @@ class Benchmark:
             schema = [schema[dataset]]
 
         path = metadata.CAIDM_CONFIG["datasets"]
-        print(f"CAIDM Benchmark Datasets - updated {os.path.getmtime(path)}")
+        date = timedate.get_mdy(os.path.getmtime(path))
+        print(f"CAIDM Benchmark Datasets - updated {date}")
 
         return pd.DataFrame(schema)
 
